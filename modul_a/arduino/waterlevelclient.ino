@@ -1,10 +1,10 @@
 #include <SoftwareSerial.h>
 
 SoftwareSerial espSerial(10, 11); // RX, TX
-//command tersedia
+//command IN
 //command=sensor
 
-//command remote
+//command OUT //response
 //command=sensor&value=45
 
 #define ASCII_0 48
@@ -123,9 +123,8 @@ void loop()
 
             // sendHTTPResponse(connectionId, strHTML);
 
-            String kondisi = getCommand();
-
-            if(kondisi == "sensor")
+            String command = getCommand();
+            if(command == "sensor")
             {
                 //baca nilai sensor disini
                 String sensor_value = "0";
