@@ -108,14 +108,69 @@ void loop(){
       delay(1000);
       clearESP8266SerialBuffer();
       
-      sendHTTPResponse(connectionId, strHTML);
-      
+     // sendHTTPResponse(connectionId, strHTML);
+     
+     String kondisi = getCommand();
+     
+     if(kondisi == "sensor"){
+       //baca nilai sensor disini
+       String sensor_value = "0";
+        sendResponse(connectionId, sensor_value);
+       }else{
+        sendResponse(connectionId, "No Command");
+    }
+     
       //Close TCP/UDP
       String cmdCIPCLOSE = "AT+CIPCLOSE="; 
       cmdCIPCLOSE += connectionId;
       sendESP8266Cmdln(cmdCIPCLOSE, 1000);
     }
   }
+}
+//getCommand , temukan perintah +IPD,0,200:command=sensor
+String getCommand(){
+    bool haveCommand = false;
+    int commandStartPos = 0;
+    char command[20];
+    for (int i=0; i<strlen(buffer); i++)
+    {
+    if (!haveCommand) // just get the first occurrence of name
+      {
+        if (  (buffer[i]=='c') && (buffer[i+1]=='o') && (buffer[i+2]=='m') && (buffer[i+3]=='m')  && (buffer[i+4]=='a') && (buffer[i+5]=='n')&& (buffer[i+6]=='d') ) 
+        {  
+          haveCommand = true;
+          commandStartPos = i+7;
+          }
+       }
+ 
+       if (haveCommand)
+       {
+          int tempPos = 0;
+          bool finishedCopying = false;
+            for (int i=commandStartPos; i<strlen(buffer); i++)
+              {
+                if ( (buffer[i]==' ') && !finishedCopying )  { finishedCopying = true;   } 
+                if ( !finishedCopying )                     { command[tempPos] = buffer[i];   tempPos++; }
+                }    
+                command[tempPos] = 0;
+         
+       }
+  
+    }
+    
+    return String(command);
+}
+void sendResponse(int id, String content){
+  String response;
+  response = content;
+  String cmd = "AT+CIPSEND=";
+  cmd += id;
+  cmd += ",";
+  cmd += response.length();
+  Serial.println("--- AT+CIPSEND ---");
+  sendESP8266Cmdln(cmd, 1000);
+  Serial.println("--- data ---");
+  sendESP8266Data(response, 1000);
 }
 
 void sendHTTPResponse(int id, String content)
