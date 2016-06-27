@@ -17,8 +17,8 @@ Rencana Software :
 
 
 Konfigurasi PinOut
-Arduino Nano            Esp8266               BATTERY
-PIN 11(digital)         TRX
+Arduino Nano    ------------------ Esp8266 --------------------BATTERY
+PIN 11(digital) ------------------ TRX     --------------------
 PIN 12(digital)         RCV
                         GND           ->      GND     
                         VCC           ->      VCC       
