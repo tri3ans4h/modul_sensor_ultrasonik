@@ -136,7 +136,8 @@ String getCommand(){
     {
     if (!haveCommand) // just get the first occurrence of name
       {
-        if (  (buffer[i]=='c') && 
+        if (
+        (buffer[i]=='c') && 
         (buffer[i+1]=='o') && 
         (buffer[i+2]=='m') && 
         (buffer[i+3]=='m')  && 
