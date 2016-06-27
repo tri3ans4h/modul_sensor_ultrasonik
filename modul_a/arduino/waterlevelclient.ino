@@ -1,5 +1,8 @@
 #include <SoftwareSerial.h>
 
+
+
+
 SoftwareSerial espSerial(10, 11); // RX, TX
 //command IN
 //command=sensor
