@@ -13,3 +13,13 @@ Rencana Hardware:
 Rencana Software :
 - Esp8266 Client connect to router 
 - Esp8266 wait data request from modul B
+
+
+
+Konfigurasi PinOut
+Arduino Nano            Esp8266               BATTERY
+PIN 11(digital)         TRX
+PIN 12(digital)         RCV
+                        GND           ->      GND     
+                        VCC           ->      VCC       
+      
