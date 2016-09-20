@@ -22,7 +22,10 @@ Rencana Software :
 - Esp8266 Client connect to router 
 - Esp8266 wait data request from modul B
 
-
+Request :
+- IPADDRESS/command=sensor
+Response
+- command=sensor&value=10
 
       
 Credit :
